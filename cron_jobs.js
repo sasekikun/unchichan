@@ -18,12 +18,14 @@ class CronJobs {
                 const today = new Date();
                 const holiday = JapaneseHolidays.isHoliday(today);
 
-                if (!holiday) {
-                    bot.say({
-                        channel: '#programmer',
-                        text: '本日のやることはこちら'
-                    });
+                if (holiday) {
+                    return;
                 }
+
+                bot.say({
+                    channel: '#programmer',
+                    text: '本日のやることはこちら'
+                });
             },
             start: true,
             timeZone: 'Asia/Tokyo'
@@ -38,16 +40,19 @@ class CronJobs {
                 const today = new Date();
                 const holiday = JapaneseHolidays.isHoliday(today);
 
-                if (!holiday) {
-                    bot.say({
-                        channel: '#programmer',
-                        text: '本日のやったことはこちら'
-                    });
-                    bot.say({
-                        channel: '#programmer',
-                        text: '次回やることはこちら'
-                    });
+                if (holiday) {
+                    return;
                 }
+
+                bot.say({
+                    channel: '#programmer',
+                    text: '本日のやったことはこちら'
+                });
+
+                bot.say({
+                    channel: '#programmer',
+                    text: '次回やることはこちら'
+                });
             },
             start: true,
             timeZone: 'Asia/Tokyo'
