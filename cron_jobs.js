@@ -8,6 +8,7 @@ class CronJobs {
     init(bot) {
 
         const JapaneseHolidays = require('japanese-holidays');
+        const questChannel = '#quest_daily'
 
         new this.CronJob({
 
@@ -23,8 +24,8 @@ class CronJobs {
                 }
 
                 bot.say({
-                    channel: '#programmer',
-                    text: '本日のやることはこちら'
+                    channel: questChannel,
+                    text: 'デイリークエスト'
                 });
             },
             start: true,
@@ -45,13 +46,13 @@ class CronJobs {
                 }
 
                 bot.say({
-                    channel: '#programmer',
-                    text: '本日のやったことはこちら'
+                    channel: questChannel,
+                    text: '本日達成したクエスト'
                 });
 
                 bot.say({
-                    channel: '#programmer',
-                    text: '次回やることはこちら'
+                    channel: questChannel,
+                    text: '次回予告'
                 });
             },
             start: true,
