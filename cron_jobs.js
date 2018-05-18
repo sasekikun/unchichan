@@ -1,127 +1,127 @@
 class CronJobs {
 
-    constructor() {
+  constructor() {
 
-        this.CronJob = require('cron').CronJob;
-    }
+    this.CronJob = require('cron').CronJob;
+  }
 
-    init(bot) {
+  init(bot) {
 
-        const JapaneseHolidays = require('japanese-holidays');
-        const questChannel = '#quest_daily'
-        const weeklyQuestChannel = '#quest_weekly'
+    const JapaneseHolidays = require('japanese-holidays');
+    const questChannel = '#quest_daily'
+    const weeklyQuestChannel = '#quest_weekly'
 
-        new this.CronJob({
+    new this.CronJob({
 
-            cronTime: '00 30 9 * * 1-5',
+      cronTime: '00 30 9 * * 1-5',
 
-            onTick: function () {
+      onTick: function () {
 
-                const today = new Date();
-                const holiday = JapaneseHolidays.isHoliday(today);
+        const today = new Date();
+        const holiday = JapaneseHolidays.isHoliday(today);
 
-                if (holiday) {
-                    return;
-                }
+        if (holiday) {
+          return;
+        }
 
-                bot.say({
-                    channel: questChannel,
-                    text: 'デイリークエスト'
-                });
-            },
-            start: true,
-            timeZone: 'Asia/Tokyo'
+        bot.say({
+          channel: questChannel,
+          text: 'デイリークエスト'
+        });
+      },
+      start: true,
+      timeZone: 'Asia/Tokyo'
+    });
+
+    new this.CronJob({
+
+      cronTime: '00 30 17 * * 1-5',
+
+      onTick: function () {
+
+        const today = new Date();
+        const holiday = JapaneseHolidays.isHoliday(today);
+
+        if (holiday) {
+          return;
+        }
+
+        bot.say({
+          channel: questChannel,
+          text: '本日達成したクエスト'
         });
 
-        new this.CronJob({
-
-            cronTime: '00 30 17 * * 1-5',
-
-            onTick: function () {
-
-                const today = new Date();
-                const holiday = JapaneseHolidays.isHoliday(today);
-
-                if (holiday) {
-                    return;
-                }
-
-                bot.say({
-                    channel: questChannel,
-                    text: '本日達成したクエスト'
-                });
-
-                bot.say({
-                    channel: questChannel,
-                    text: '次回予告'
-                });
-            },
-            start: true,
-            timeZone: 'Asia/Tokyo'
+        bot.say({
+          channel: questChannel,
+          text: '次回予告'
         });
+      },
+      start: true,
+      timeZone: 'Asia/Tokyo'
+    });
 
-        new this.CronJob({
+    new this.CronJob({
 
-            cronTime: '00 00 18 * * 0-4',
+      cronTime: '00 00 18 * * 0-4',
 
-            onTick: () => {
+      onTick: () => {
 
-                const now = new Date();
-                const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-                const holiday = JapaneseHolidays.isHoliday(tomorrow);
+        const now = new Date();
+        const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        const holiday = JapaneseHolidays.isHoliday(tomorrow);
 
-                if (holiday) {
-                    bot.say({
-                        channel: 'programmer',
-                        text: "明日は " + holiday + " でお休みだよ！やったね！"
-                    });
-                }
-
-            },
-            start: true,
-            timeZone: 'Asia/Tokyo'
-        });
-
-      new this.CronJob({
-
-        cronTime: '00 30 9 * * 1',
-
-        onTick: () => {
-
-          if (JapaneseHolidays.isHoliday(new Data())) {
-            return;
-          }
-
+        if (holiday) {
           bot.say({
-            channel: weeklyQuestChannel,
-            text: 'ウィークリークエスト'
+            channel: 'programmer',
+            text: "明日は " + holiday + " でお休みだよ！やったね！"
           });
+        }
 
-        },
-        start: true,
-        timeZone: 'Asia/Tokyo'
-      });
+      },
+      start: true,
+      timeZone: 'Asia/Tokyo'
+    });
 
-      new this.CronJob({
+    new this.CronJob({
 
-        cronTime: '00 30 17 * * 5',
+      cronTime: '00 30 9 * * 1',
 
-        onTick: function () {
+      onTick: () => {
 
-          if (JapaneseHolidays.isHoliday(new Data())) {
-            return;
-          }
+        if (JapaneseHolidays.isHoliday(new Data())) {
+          return;
+        }
 
-          bot.say({
-            channel: questChannel,
-            text: '達成したウィークリークエスト'
-          });
-        },
-        start: true,
-        timeZone: 'Asia/Tokyo'
-      });
+        bot.say({
+          channel: weeklyQuestChannel,
+          text: 'ウィークリークエスト'
+        });
 
-    }
+      },
+      start: true,
+      timeZone: 'Asia/Tokyo'
+    });
+
+    new this.CronJob({
+
+      cronTime: '00 30 17 * * 5',
+
+      onTick: function () {
+
+        if (JapaneseHolidays.isHoliday(new Data())) {
+          return;
+        }
+
+        bot.say({
+          channel: questChannel,
+          text: '達成したウィークリークエスト'
+        });
+      },
+      start: true,
+      timeZone: 'Asia/Tokyo'
+    });
+
+  }
 }
 
 module.exports = CronJobs
