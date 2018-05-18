@@ -88,7 +88,7 @@ class CronJobs {
 
       onTick: () => {
 
-        if (JapaneseHolidays.isHoliday(new Data())) {
+        if (JapaneseHolidays.isHoliday(new Date())) {
           return;
         }
 
@@ -108,7 +108,7 @@ class CronJobs {
 
       onTick: function () {
 
-        if (JapaneseHolidays.isHoliday(new Data())) {
+        if (JapaneseHolidays.isHoliday(new Date())) {
           return;
         }
 
