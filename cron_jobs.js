@@ -9,6 +9,7 @@ class CronJobs {
 
         const JapaneseHolidays = require('japanese-holidays');
         const questChannel = '#quest_daily'
+        const weeklyQuestChannel = '#quest_weekly'
 
         new this.CronJob({
 
@@ -80,6 +81,45 @@ class CronJobs {
             start: true,
             timeZone: 'Asia/Tokyo'
         });
+
+      new this.CronJob({
+
+        cronTime: '00 30 9 * * 1',
+
+        onTick: () => {
+
+          if (JapaneseHolidays.isHoliday(new Data())) {
+            return;
+          }
+
+          bot.say({
+            channel: weeklyQuestChannel,
+            text: 'ウィークリークエスト'
+          });
+
+        },
+        start: true,
+        timeZone: 'Asia/Tokyo'
+      });
+
+      new this.CronJob({
+
+        cronTime: '00 30 17 * * 5',
+
+        onTick: function () {
+
+          if (JapaneseHolidays.isHoliday(new Data())) {
+            return;
+          }
+
+          bot.say({
+            channel: questChannel,
+            text: '達成したウィークリークエスト'
+          });
+        },
+        start: true,
+        timeZone: 'Asia/Tokyo'
+      });
 
     }
 }
