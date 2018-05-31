@@ -113,7 +113,7 @@ class CronJobs {
         }
 
         bot.say({
-          channel: questChannel,
+          channel: weeklyQuestChannel,
           text: '達成したウィークリークエスト'
         });
       },
